@@ -24,6 +24,8 @@ import {
   MessageItem,
   NotificationItem,
 } from '../types';
+import avatarSarah from '../assets/images/avatar_client_sarah_1790511129683.jpg';
+import avatarMarcus from '../assets/images/avatar_client_marcus_1790511148752.jpg';
 
 export const COMPANY_INFO = {
   name: 'Alpha Virtual Task',
@@ -203,7 +205,7 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     company: 'Apex Digital Solutions',
     review: 'Alpha Virtual Task transformed our messy 45,000-row CRM database in under 48 hours. Their team eliminated duplicates, verified contact formats, and handed back a pristine dataset. Their accuracy and communication set a gold standard.',
     rating: 5,
-    avatarUrl: '/src/assets/images/avatar_client_sarah_1790511129683.jpg',
+    avatarUrl: avatarSarah,
     serviceUsed: 'Data Cleaning & Lead Enrichment',
     date: 'February 2025',
     verified: true,
@@ -215,7 +217,7 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     company: 'Vance Capital & Logistics',
     review: 'Finding a reliable data partner who understands confidentiality and urgency has been our biggest challenge. Alpha Virtual Task has completed over 15 spreadsheet and market research projects for our investment portfolio with zero discrepancies.',
     rating: 5,
-    avatarUrl: '/src/assets/images/avatar_client_marcus_1790511148752.jpg',
+    avatarUrl: avatarMarcus,
     serviceUsed: 'Excel Modeling & Web Research',
     date: 'January 2025',
     verified: true,

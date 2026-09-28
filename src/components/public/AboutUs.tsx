@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../common/Button';
 import { Modal } from '../common/Modal';
 import { Shield, CheckCircle, Lock, Award, ArrowRight } from 'lucide-react';
+import aboutImage from '../../assets/images/about_data_operations_1790511113070.jpg';
 
 interface AboutUsProps {
   onContactClick: () => void;
@@ -23,7 +24,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onContactClick }) => {
               <div className="relative rounded-2xl p-1 bg-gradient-to-tr from-[#E5A93C]/40 via-white/10 to-[#E5A93C]/20 shadow-2xl">
                 <div className="rounded-[14px] overflow-hidden bg-[#161B26] aspect-[4/3] relative group">
                   <img
-                    src="/src/assets/images/about_data_operations_1790511113070.jpg"
+                    src={aboutImage}
                     alt="Alpha Virtual Task team of data specialists reviewing operations"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"

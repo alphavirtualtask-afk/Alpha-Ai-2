@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Shield, Clock } from 'lucide-react';
 import { Button } from '../common/Button';
+import heroImage from '../../assets/images/hero_virtual_task_workspace_1790511094279.jpg';
 
 interface HeroProps {
   onExploreServices: () => void;
@@ -110,7 +111,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="relative rounded-2xl p-1 bg-gradient-to-br from-[#E5A93C]/50 via-white/10 to-[#E5A93C]/20 shadow-2xl shadow-black/80">
                 <div className="relative rounded-[14px] overflow-hidden bg-[#121622] aspect-[16/10] sm:aspect-[4/3] group">
                   <img
-                    src="/src/assets/images/hero_virtual_task_workspace_1790511094279.jpg"
+                    src={heroImage}
                     alt="Alpha Virtual Task high-end digital operations workstation"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"

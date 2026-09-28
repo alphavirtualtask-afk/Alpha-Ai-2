@@ -29,19 +29,37 @@ export default function App() {
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
 
-    if (path.includes('/admin/login') || hash.includes('/admin/login') || hash.includes('admin/login')) {
+    // Check hash first since it's most specific and reliable on GH Pages
+    if (hash.includes('/admin/login') || hash.includes('admin/login')) {
       return 'admin-login';
     }
-    if (path === '/admin' || path.startsWith('/admin/') || hash === '#/admin' || hash === '#admin') {
+    if (hash === '#/admin' || hash === '#admin' || hash.includes('admin-dashboard')) {
       return 'admin-dashboard';
     }
-    if (path === '/dashboard' || path.startsWith('/client/dashboard') || hash.includes('dashboard')) {
+    if (hash.includes('client-dashboard') || hash.includes('dashboard')) {
       return 'client-dashboard';
     }
-    if (path === '/login' || path.includes('/client/login') || hash.includes('signin') || hash.includes('login')) {
+    if (hash.includes('signin') || hash.includes('login')) {
       return 'client-signin';
     }
-    if (path === '/signup' || path.includes('/client/signup') || hash.includes('signup')) {
+    if (hash.includes('signup')) {
+      return 'client-signup';
+    }
+
+    // Fallback to path check if hash is not set
+    if (path.endsWith('/admin/login') || path.includes('/admin/login')) {
+      return 'admin-login';
+    }
+    if (path.endsWith('/admin') || path.startsWith('/admin/') || path.includes('/admin')) {
+      return 'admin-dashboard';
+    }
+    if (path.endsWith('/dashboard') || path.startsWith('/client/dashboard') || path.includes('/dashboard')) {
+      return 'client-dashboard';
+    }
+    if (path.endsWith('/login') || path.includes('/client/login') || path.includes('/login')) {
+      return 'client-signin';
+    }
+    if (path.endsWith('/signup') || path.includes('/client/signup') || path.includes('/signup')) {
       return 'client-signup';
     }
     return 'home';
@@ -51,15 +69,34 @@ export default function App() {
     setCurrentView(view);
     if (!updateHistory) return;
 
-    let targetPath = '/';
-    if (view === 'admin-dashboard') targetPath = '/admin';
-    else if (view === 'admin-login') targetPath = '/admin/login';
-    else if (view === 'client-dashboard') targetPath = '/dashboard';
-    else if (view === 'client-signin') targetPath = '/login';
-    else if (view === 'client-signup') targetPath = '/signup';
+    // Detect if we should use hash routing (GitHub Pages or subfolder deployment)
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    // If we're deployed to a subdirectory, pathname won't be just '/' (or empty), e.g. /my-repo/
+    const isSubdirectory = window.location.pathname !== '/' && !['/login', '/signup', '/dashboard', '/admin', '/admin/login'].includes(window.location.pathname);
+    const useHash = isGitHubPages || isSubdirectory || window.location.hash !== '';
 
-    if (window.location.pathname !== targetPath) {
-      window.history.pushState(null, '', targetPath);
+    if (useHash) {
+      let targetHash = '#/';
+      if (view === 'admin-dashboard') targetHash = '#/admin';
+      else if (view === 'admin-login') targetHash = '#/admin/login';
+      else if (view === 'client-dashboard') targetHash = '#/dashboard';
+      else if (view === 'client-signin') targetHash = '#/login';
+      else if (view === 'client-signup') targetHash = '#/signup';
+
+      if (window.location.hash !== targetHash) {
+        window.history.pushState(null, '', targetHash);
+      }
+    } else {
+      let targetPath = '/';
+      if (view === 'admin-dashboard') targetPath = '/admin';
+      else if (view === 'admin-login') targetPath = '/admin/login';
+      else if (view === 'client-dashboard') targetPath = '/dashboard';
+      else if (view === 'client-signin') targetPath = '/login';
+      else if (view === 'client-signup') targetPath = '/signup';
+
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState(null, '', targetPath);
+      }
     }
   }, []);
 
